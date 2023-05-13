@@ -74,3 +74,18 @@ This is the way we cut off the woodchucker: use manipulation of STDOUT to trigge
 #### Use with xxd to get the raw binary from the hex.
 
 #### This program is for educational and security research purposes.
+
+## chaos test mode
+
+Rather than using a fuzzer, a way to fuzz "directly" with woodchucker and xxd is to let the raw binary be processed by the terminal or systems.
+
+
+Warning: this can cause crashes or strange behavior!
+
+So we can "fuzz" a terminal (and eat up system resources!) by doing this:
+
+```
+woodchucker 0 0 | xxd -r -p
+```
+
+Executing the raw chaos like that is a chaos test we can unleash on systems to see how they handle it!
