@@ -47,7 +47,7 @@ thread 'main' panicked at 'failed printing to stdout: Broken pipe (os error 32)'
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 ```
 
-There are also arithmatc panics on the full demo output. Using the hex only output(pass 2+ args, anything will do) will avoid those as they are caused by the math operations.
+There are also arithmatc panics on the full demo output. Using the hex only output (pass 2+ args, anything will do) will avoid those as they are caused by the math operations.
 
 ```
 $ woodchucker 333333333333
