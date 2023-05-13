@@ -13,7 +13,7 @@ A second argument is an option flag to only output the hex instead of Int,Hex,Bi
 This hex value is not the hex encoded string of the integer, but the hex encoding of the u64 as little-endian bytes. This is much more useful for fuzzing as the hex decode (via xxd) of this hex get's us raw binary.
 
 ```
-nt: 333404064, Hex: "13DF57A0"
+int: 333404064, Hex: "13DF57A0"
 ```
 ```
 $ echo 13DF57A0 | xxd -r -p > t
