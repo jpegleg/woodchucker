@@ -72,3 +72,14 @@ Or to hog the file system very quickly:
 woodchucker 9999999999999999999 > woodchucker.dat
 ```
 Executing the raw chaos like that is a chaos test we can unleash on systems to see how they handle it! Chaos tests might include actions like these, such as filling up disks and spewing binary into the logging storage system or authentication system.
+
+
+## Example using with ffuf
+
+Ffuf won't take the piped input, as far as I am aware, but we can use files. Example:
+
+```
+woodchucker 0 0 | head -n 2000000 | xxd -r -p | sed -e "s/.\{16\}/&\n/g" > fuzz.txt;
+ffuf -w fuzz.txt -u https://mysystem.local/api/v1/?session-id=FUZZ -v -o report.json;
+```
+
