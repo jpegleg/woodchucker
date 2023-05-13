@@ -69,6 +69,6 @@ woodchucker 0 0 | xxd -r -p
 Or to hog the file system very quickly:
 
 ```
-woodchucker 9999999999999 0 | xxd -r -p > woodchucker.dat
+woodchucker 9999999999999999999 > woodchucker.dat
 ```
-Executing the raw chaos like that is a chaos test we can unleash on systems to see how they handle it!
+Executing the raw chaos like that is a chaos test we can unleash on systems to see how they handle it! Chaos tests might include actions like these, such as filling up disks and spewing binary into the logging storage system or authentication system.
