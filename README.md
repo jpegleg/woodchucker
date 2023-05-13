@@ -50,6 +50,7 @@ note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 There are also arithmatc panics on the full demo output. Using the hex only output(pass 2+ args, anything will do) will avoid those as they are caused by the math operations.
 
 ```
+$ woodchucker 333333333333
 Starting u64 int: 333333333333
 thread 'main' panicked at 'attempt to multiply with overflow', /rustc/84c898d65adf2f39a5a98507f1fe0ce10a2b8dbc/library/core/src/ops/arith.rs:345:45
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
@@ -57,7 +58,7 @@ note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 So we would use the second argument to get that hex, example:
 
 ```
-argo run 333333333333 lksdfs | head -n3
+$ woodchucker 333333333333 0 | head -n3
     Finished dev [unoptimized + debuginfo] target(s) in 0.00s
      Running `target/debug/woodchucker 333333333333 lksdfs`
 Only outputting hex...
