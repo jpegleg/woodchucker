@@ -38,36 +38,14 @@ Another example that uses xxd to go from hex to raw and then sed to insert a new
 woodchucker 0 0 | head -n 20000 | xxd -r -p | sed -e "s/.\{16\}/&\n/g" > fuzz.txt
 ```
 
-#### Intentional Panics
+#### Intentional Panicks
 
-Note that woodchucker will panic when the STDOUT is interrupted, like so:
+Note that woodchucker will panick when the STDOUT is interrupted, like so:
 
 ```
 thread 'main' panicked at 'failed printing to stdout: Broken pipe (os error 32)', library/std/src/io/stdio.rs:1008:9
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 ```
-
-There are also arithmatc panics on the full demo output. Using the hex only output (pass 2+ args, anything will do) will avoid those as they are caused by the math operations.
-
-```
-$ woodchucker 333333333333
-Starting u64 int: 333333333333
-thread 'main' panicked at 'attempt to multiply with overflow', /rustc/84c898d65adf2f39a5a98507f1fe0ce10a2b8dbc/library/core/src/ops/arith.rs:345:45
-note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
-```
-So we would use the second argument to get that hex, example:
-
-```
-$ woodchucker 333333333333 0 | head -n3
-    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
-     Running `target/debug/woodchucker 333333333333 lksdfs`
-Only outputting hex...
-Starting u64 int: 333333333333
-"4D9C370555"
-thread 'main' panicked at 'failed printing to stdout: Broken pipe (os error 32)', library/std/src/io/stdio.rs:1008:9
-note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
-```
-Instead we have the panic from breaking STDIN with the head. If we drop the head, it will run "forever".
 
 This is the way we cut off the woodchucker: use manipulation of STDOUT to trigger panic and termination. Alternatively, kill the program.
 
@@ -82,10 +60,15 @@ Rather than using a fuzzer, a way to fuzz "directly" with woodchucker and xxd is
 
 Warning: this can cause crashes or strange behavior!
 
-So we can "fuzz" a terminal (and eat up system resources!) by doing this:
+So we can "fuzz" a terminal emulator, or log processor if applicable (pipe to logger etc), and eat up system resources, by doing this:
 
 ```
 woodchucker 0 0 | xxd -r -p
 ```
 
+Or to hog the file system very quickly:
+
+```
+woodchucker 9999999999999 0 | xxd -r -p > woodchucker.dat
+```
 Executing the raw chaos like that is a chaos test we can unleash on systems to see how they handle it!
