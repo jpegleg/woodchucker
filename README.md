@@ -10,7 +10,7 @@ There is one required argument, which is a u64 (range 0 through 1844674407370955
 
 A second argument is an option flag to only output the hex instead of Int,Hex,Binary,ByteArray,UTF-8/lossy,BitShift1,BinarySquare,Square,SquareRoot
 
-This hex value is not the hex encoded string of the integer, but the hex encoding of the u64 as little-endian bytes. This is much more useful for fuzzing as the hex decode (via xxd) of this hex get's us raw binary.
+This hex value is not the hex encoded string of the integer, but the hex encoding of the u64 as little-endian bytes. This is much more useful for fuzzing as the hex decode (via xxd) of this hex gets us raw binary.
 
 ```
 int: 333404064, Hex: "13DF57A0"
