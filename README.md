@@ -38,6 +38,13 @@ Another example that uses xxd to go from hex to raw and then sed to insert a new
 woodchucker 0 0 | head -n 20000 | xxd -r -p | sed -e "s/.\{16\}/&\n/g" > fuzz.txt
 ```
 
+Or every 8 bytes:
+```
+woodchucker 0 0 | head -n 20000 | xxd -r -p | sed -e "s/.\{8\}/&\n/g" > fuzz.txt
+```
+
+Note that sed can't handle all of the data! So some lines will be much longer.
+
 #### Intentional Panicks
 
 Note that woodchucker will panick when the STDOUT is interrupted, like so:
